@@ -40,6 +40,12 @@ require('packer').startup(function(use)
 
   -- plenary.nvim を追加
   use 'nvim-lua/plenary.nvim'
+
+  -- コメントアウト機能
+  use 'terrortylor/nvim-comment'
+
+  -- GitHub Copilot
+  use 'github/copilot.vim'
 end)
 
 -- LSPの設定
@@ -113,6 +119,13 @@ cmp.setup({
 
 -- nvim-autopairs の設定
 require('nvim-autopairs').setup{}
+
+-- nvim-comment の設定
+require('nvim_comment').setup()
+
+-- GitHub Copilotの設定
+vim.g.copilot_no_tab_map = true
+vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
 
 -- 保存時に自動フォーマット
 vim.cmd([[
