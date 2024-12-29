@@ -13,6 +13,7 @@ This repository contains my personal Neovim configuration using Lua.
 2. Open Neovim and install the plugins using `packer.nvim`:
 
     ```sh
+    cd ~/.config/nvim
     nvim +PackerSync
     ```
 
