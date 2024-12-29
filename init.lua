@@ -67,6 +67,17 @@ lspconfig.gopls.setup {
       staticcheck = true,
     },
   },
+  on_attach = function(client, bufnr)
+    -- 保存時にインポートを整理
+    if client.server_capabilities.documentFormattingProvider then
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        buffer = bufnr,
+        callback = function()
+          vim.lsp.buf.format({ async = true })
+        end,
+      })
+    end
+  end,
 }
 
 -- null-ls の設定
@@ -74,7 +85,9 @@ local null_ls = require('null-ls')
 null_ls.setup({
   sources = {
     null_ls.builtins.formatting.gofmt,
-    null_ls.builtins.formatting.goimports,
+    null_ls.builtins.formatting.goimports.with({
+      extra_args = { "-local", "your_module_name" } -- ここでモジュール名を指定
+    }),
     null_ls.builtins.diagnostics.golangci_lint,
   },
 })
@@ -131,7 +144,7 @@ vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true,
 vim.cmd([[
   augroup FormatAutogroup
     autocmd!
-    autocmd BufWritePost *.go lua vim.lsp.buf.format()
+    autocmd BufWritePost *.go lua vim.lsp.buf.format({ async = true })
   augroup END
 ]])
 
