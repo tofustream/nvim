@@ -60,6 +60,38 @@ This repository contains my personal Neovim configuration using Lua.
 - **Tab and Space Visualization**
 - **Tab Size**: Set to 4 spaces
 
+## Additional Setup for Go Development
+
+This configuration relies on several tools that need to be installed for the best experience, including `golangci-lint` for linting Go code.
+
+To automatically install and configure `golangci-lint` and set up your environment, you can use the provided installation script:
+
+### `install_golangci_lint_zsh.sh`
+
+This script automates the installation of `golangci-lint` and adds the necessary directories to your `$PATH`. It works specifically for `zsh` users.
+
+#### Usage:
+
+1. Download the script:
+
+    ```sh
+    curl -O https://raw.githubusercontent.com/tofustream/nvim/main/install_golangci_lint_zsh.sh
+    ```
+
+2. Make the script executable:
+
+    ```sh
+    chmod +x install_golangci_lint_zsh.sh
+    ```
+
+3. Run the script:
+
+    ```sh
+    ./install_golangci_lint_zsh.sh
+    ```
+
+This will install `golangci-lint`, configure it to be accessible from the terminal, and ensure that it works seamlessly with your Neovim setup.
+
 ## License
 
 This project is licensed under the MIT License.
